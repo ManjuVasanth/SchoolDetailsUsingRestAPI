@@ -6,6 +6,9 @@ import com.student.schooldetails.service.StudentService;
 
 import jakarta.servlet.http.HttpServletRequest;
 
+
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +40,19 @@ public class StudentController {
     
     @GetMapping("/csrf-token")
     public CsrfToken getCsrfToken(HttpServletRequest request) {
-    	return (CsrfToken) request.getAttribute("-csrf");
+    	return (CsrfToken) request.getAttribute("_csrf");
     }
+    
+    @PutMapping("/{id}/update-name")
+    public ResponseEntity<Object> updateStudentName(@PathVariable Long id, @RequestBody String name) {
+        studentService.updateStudentName(id, name);
+        return ResponseHandler.responseBuilder("Student name updated successfully", HttpStatus.OK, null);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteStudent(@PathVariable Long id) {
+        studentService.deleteStudent(id);
+        return ResponseEntity.ok("Student deleted successfully");
+    }
+
 }

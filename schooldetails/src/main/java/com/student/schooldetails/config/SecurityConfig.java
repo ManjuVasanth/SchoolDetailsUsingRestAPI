@@ -15,7 +15,18 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 		 return httpSecurity.csrf(customizer->customizer.disable())
-		.authorizeHttpRequests(request->request.anyRequest().authenticated())
+		//.authorizeHttpRequests(request->request.anyRequest().authenticated())
+				 .authorizeHttpRequests(auth -> auth
+						    .requestMatchers(
+						        "/swagger-ui/**",
+						        "/v2/api-docs",
+						        "/v3/api-docs",
+						        "/swagger-resources/**",
+						        "/webjars/**"
+						    ).permitAll()
+						    .anyRequest().authenticated()
+						)
+
 		.httpBasic(Customizer.withDefaults())
 		.sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 		.build();

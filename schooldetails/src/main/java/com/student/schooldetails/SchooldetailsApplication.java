@@ -1,13 +1,29 @@
 package com.student.schooldetails;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.student.schooldetails.service.StudentService;
+
 @SpringBootApplication
-public class SchooldetailsApplication {
+public class SchooldetailsApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SchooldetailsApplication.class, args);
 	}
+	@Autowired
+	private StudentService studentService;
+
+	public void setStudentService(StudentService studentService) {
+		this.studentService = studentService;
+	}
+	
+	public void run(String...args) throws Exception{
+		studentService.updateStudentName(2L, "Joy Smith");
+        System.out.println("Student name updated successfully.");
+	}
+	
 
 }

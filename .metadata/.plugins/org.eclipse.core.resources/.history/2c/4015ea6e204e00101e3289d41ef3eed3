@@ -1,0 +1,5 @@
+package com.student.schooldetails.config;
+
+public class SwaggerConfig {
+
+}
