@@ -1,0 +1,64 @@
+package com.student.schooldetails;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.student.schooldetails.entity.Student;
+import com.student.schooldetails.repository.StudentRepository;
+import com.student.schooldetails.service.StudentServiceImpl;
+
+@SpringBootTest(classes= {ServiceMockitoTest.class})
+public class ServiceMockitoTest {
+	@Mock
+	StudentRepository studentRep;
+	@InjectMocks
+	StudentServiceImpl studentService;
+	public List<Student> myStudents;
+	
+	
+	@Test
+	@Order(1)
+	public void test_findAllStudents() {
+		myStudents = new ArrayList<Student>();
+		myStudents.add(new Student(1,"Mi","Smith High School"));
+		myStudents.add(new Student(2,"Yoku","Ranch High School"));
+		myStudents.add(new Student(3,"Ted","SmithGen High School"));
+		myStudents.add(new Student(4,"Roku","Ranch High School"));
+		myStudents.add(new Student(5,"Yo","Ranch High School"));
+		myStudents.add(new Student(6,"Ko","Ranch High School"));
+		when(studentRep.findAll()).thenReturn(myStudents);
+		assertEquals(6,studentService.findAllStudents().size());
+		
+	}
+	
+	@Test
+	@Order(2)
+	public void test_findBySchoolName() {
+		myStudents = new ArrayList<Student>();
+		myStudents.add(new Student(1,"Mi","Smith High School"));
+		myStudents.add(new Student(2,"Yoku","Ranch High School"));
+		myStudents.add(new Student(3,"Ted","SmithGen High School"));
+		myStudents.add(new Student(4,"Roku","Ranch High School"));
+		myStudents.add(new Student(5,"Yo","Ranch High School"));
+		myStudents.add(new Student(6,"Ko","Ranch High School"));
+		String schoolName ="SmithGen High School";
+		when(studentRep.findAll()).thenReturn(myStudents);
+		assertEquals(schoolName,studentService.findBySchoolName(schoolName).getSchoolName());
+	}
+	@Test
+	@Order(3)
+	public void test_saveStudent(Student student) {
+		student = new Student(7,"Hi","Intern High School");
+		when(studentRep.save(student)).thenReturn(student);
+		assertEquals(7, studentService.saveStudent(student));
+	}
+	
+}

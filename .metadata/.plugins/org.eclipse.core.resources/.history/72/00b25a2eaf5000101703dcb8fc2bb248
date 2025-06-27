@@ -1,0 +1,5 @@
+package com.student.schooldetails.repository;
+
+public class StudentRepositoryTest {
+
+}

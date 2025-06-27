@@ -5,7 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.student.schooldetails.service.StudentService;
+import com.student.schooldetails.service.StudentServiceImpl;
 
 @SpringBootApplication
 public class SchooldetailsApplication implements CommandLineRunner {
@@ -14,14 +14,14 @@ public class SchooldetailsApplication implements CommandLineRunner {
 		SpringApplication.run(SchooldetailsApplication.class, args);
 	}
 	@Autowired
-	private StudentService studentService;
+	private StudentServiceImpl studentService;
 
-	public void setStudentService(StudentService studentService) {
+	public void setStudentService(StudentServiceImpl studentService) {
 		this.studentService = studentService;
 	}
 	
 	public void run(String...args) throws Exception{
-		studentService.updateStudentName(2L, "Joy Smith");
+		studentService.updateStudentName(8L, "Jo Doe");
         System.out.println("Student name updated successfully.");
 	}
 	

@@ -1,0 +1,46 @@
+package com.student.schooldetails.repository;
+
+
+import org.assertj.core.api.Assertions;
+
+import java.util.List;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+
+import com.student.schooldetails.entity.Student;
+
+@DataJpaTest
+public class StudentRepositoryTest {
+
+	@Autowired
+	private StudentRepository studentRepository;
+	Student student;
+	
+	@BeforeEach
+	void setUp() {
+		student = new Student(1L,"John Doe","Spring High School");
+		studentRepository.save(student);
+	}
+	@AfterEach
+	void tearDown() {
+		student =null;
+		studentRepository.deleteAll();
+	}
+	
+	// Test success
+	
+	@Test
+	void testFindBySchoolName_Found() {
+		List<Student> studentsList = studentRepository.findBySchoolName("Spring High School");
+
+		//assertThat(studentsList).isNotEmpty();
+		Assertions.assertThat(studentsList.get(0).getId()).isEqualTo(student.getId());
+		Assertions.assertThat(studentsList.get(0).getSchoolName()).isEqualTo(student.getSchoolName());
+	}
+
+	
+}

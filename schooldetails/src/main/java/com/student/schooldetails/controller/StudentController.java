@@ -2,7 +2,7 @@ package com.student.schooldetails.controller;
 
 import com.student.schooldetails.entity.Student;
 import com.student.schooldetails.response.ResponseHandler;
-import com.student.schooldetails.service.StudentService;
+import com.student.schooldetails.service.StudentServiceImpl;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -23,7 +23,7 @@ import java.util.List;
 
 public class StudentController {
     @Autowired
-    private StudentService studentService;
+    private StudentServiceImpl studentService;
     @GetMapping("/all")
     public ResponseEntity<Object> findAllStudents(){
     	 return ResponseHandler.responseBuilder("Requested student details are given here",HttpStatus.OK, studentService.findAllStudents());
@@ -53,6 +53,12 @@ public class StudentController {
     public ResponseEntity<String> deleteStudent(@PathVariable Long id) {
         studentService.deleteStudent(id);
         return ResponseEntity.ok("Student deleted successfully");
+    }
+    @GetMapping("/schoolName")
+    public ResponseEntity<Object> findBySchoolName(@PathVariable String schoolName){
+    	studentService.findBySchoolName(schoolName);
+    	 return ResponseHandler.responseBuilder("Requested student details are given here according to school name",HttpStatus.OK, studentService.findAllStudents());
+       
     }
 
 }
