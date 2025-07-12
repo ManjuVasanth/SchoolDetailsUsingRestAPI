@@ -1,5 +1,0 @@
-package com.student.schooldetails.service;
-
-public interface StudentService {
-
-}

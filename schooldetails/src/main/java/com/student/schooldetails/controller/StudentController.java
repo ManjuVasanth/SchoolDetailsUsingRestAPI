@@ -55,7 +55,7 @@ public class StudentController {
         return ResponseEntity.ok("Student deleted successfully");
     }
     @GetMapping("/schoolName")
-    public ResponseEntity<Object> findBySchoolName(@PathVariable String schoolName){
+    public ResponseEntity<Object> findBySchoolName(@RequestParam String schoolName){
     	studentService.findBySchoolName(schoolName);
     	 return ResponseHandler.responseBuilder("Requested student details are given here according to school name",HttpStatus.OK, studentService.findAllStudents());
        

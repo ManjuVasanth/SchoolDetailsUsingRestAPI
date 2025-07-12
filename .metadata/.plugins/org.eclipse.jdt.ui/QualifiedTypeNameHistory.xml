@@ -41,5 +41,8 @@
     <fullyQualifiedTypeName name="com.student.schooldetails.service.StudentService"/>
     <fullyQualifiedTypeName name="com.student.schooldetails.entity.Student"/>
     <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="java.util.Optional"/>
     <fullyQualifiedTypeName name="org.junit.jupiter.api.Order"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
+    <fullyQualifiedTypeName name="org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc"/>
 </qualifiedTypeNameHistroy>
